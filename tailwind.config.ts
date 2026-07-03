@@ -8,27 +8,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        paper: "#EBE7DD",
-        ink: "#161512",
-        muted: "#6f6a5d",
-        accent: "#FF4D00",
+        // Monochrome theme via CSS vars — flipped by the contrast toggle
+        bg: "rgb(var(--bg) / <alpha-value>)",
+        fg: "rgb(var(--fg) / <alpha-value>)",
       },
       fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       animation: {
-        marquee: "marquee 42s linear infinite",
-        "marquee-reverse": "marquee-reverse 42s linear infinite",
+        marquee: "marquee 24s linear infinite",
+        "marquee-slow": "marquee 48s linear infinite",
+        "spin-slow": "spin 10s linear infinite",
         blink: "blink 1.1s steps(1) infinite",
       },
       keyframes: {
         marquee: {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
-        },
-        "marquee-reverse": {
-          "0%": { transform: "translateX(-50%)" },
-          "100%": { transform: "translateX(0)" },
         },
         blink: {
           "0%, 100%": { opacity: "1" },

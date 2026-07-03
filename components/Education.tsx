@@ -6,58 +6,53 @@ import SectionHeading from "./SectionHeading";
 
 export default function Education() {
   return (
-    <section id="education" className="relative py-24 sm:py-32">
-      <div className="container-px relative z-10">
-        <SectionHeading index="05" title="Education" />
+    <section id="education" className="relative py-28 sm:py-40">
+      <div className="container-px">
+        <SectionHeading index="05" title="Education" hint="THE PAPER TRAIL" />
 
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-          {/* Education rows */}
-          <div>
+        <div className="grid gap-16 lg:grid-cols-[1.4fr_1fr]">
+          <div className="border-t border-fg/20">
             {education.map((e, i) => (
-              <Reveal key={i} delay={i * 0.06}>
-                <div className="group border-b border-dotted border-ink/40 py-6 first:pt-0">
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                    <h3 className="text-sm font-bold uppercase tracking-wide sm:text-base">
-                      {e.degree}
-                    </h3>
-                    <span className="text-sm font-bold text-accent">{e.score}</span>
+              <Reveal key={i} delay={i * 0.05}>
+                <div className="grid gap-2 border-b border-fg/20 py-7 sm:grid-cols-[100px_1fr_auto] sm:items-baseline sm:gap-6">
+                  <span className="meta">№{String(i + 1).padStart(3, "0")}</span>
+                  <div>
+                    <h3 className="text-base font-bold tracking-tight sm:text-lg">{e.degree}</h3>
+                    <div className="mt-1 text-sm text-fg/50">
+                      {e.institute} — {e.period}
+                    </div>
                   </div>
-                  <div className="mt-2 flex flex-wrap items-center gap-x-3 text-sm text-muted">
-                    <span>{e.institute}</span>
-                    <span aria-hidden>{"//"}</span>
-                    <span>{e.period}</span>
-                  </div>
+                  <span className="font-mono text-sm font-bold">{e.score}</span>
                 </div>
               </Reveal>
             ))}
           </div>
 
-          {/* Extras */}
-          <div className="space-y-5">
+          <div className="space-y-10">
             <Reveal>
-              <div className="box-brut p-6">
-                <div className="label-xs mb-4">{"//"} certification</div>
+              <div>
+                <div className="meta border-b border-fg/20 pb-3">(A) Certification</div>
                 {extras.certifications.map((c) => (
-                  <div key={c.title}>
-                    <div className="text-sm font-bold">{c.title}</div>
-                    <div className="mt-1 text-xs text-muted">
-                      {c.org} {"//"} {c.year}
+                  <div key={c.title} className="pt-4">
+                    <div className="text-sm font-bold sm:text-base">{c.title}</div>
+                    <div className="mt-1 font-mono text-xs text-fg/50">
+                      {c.org} — {c.year}
                     </div>
                   </div>
                 ))}
               </div>
             </Reveal>
 
-            <Reveal delay={0.06}>
-              <div className="box-brut p-6">
-                <div className="label-xs mb-4">{"//"} leadership</div>
+            <Reveal delay={0.05}>
+              <div>
+                <div className="meta border-b border-fg/20 pb-3">(B) Leadership</div>
                 {extras.positions.map((p) => (
-                  <div key={p.title}>
-                    <div className="text-sm font-bold">{p.title}</div>
-                    <div className="mt-1 text-xs text-muted">
-                      {p.org} {"//"} {p.year}
+                  <div key={p.title} className="pt-4">
+                    <div className="text-sm font-bold sm:text-base">{p.title}</div>
+                    <div className="mt-1 font-mono text-xs text-fg/50">
+                      {p.org} — {p.year}
                     </div>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">{p.note}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-fg/60">{p.note}</p>
                   </div>
                 ))}
               </div>

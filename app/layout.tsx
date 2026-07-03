@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
@@ -9,7 +15,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lakshay Kathpalia — AI/ML Intern & Full-Stack Developer",
+  title: "Lakshay Kathpalia — AI/ML Developer",
   description:
     "Portfolio of Lakshay Kathpalia — AI/ML intern at Publicis Sapient, B.Tech CS (AI & ML) student, full-stack developer based in Gurgaon, India.",
   keywords: [
@@ -25,7 +31,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Lakshay Kathpalia" }],
   openGraph: {
-    title: "Lakshay Kathpalia — AI/ML Intern & Full-Stack Developer",
+    title: "Lakshay Kathpalia — AI/ML Developer",
     description:
       "AI/ML intern at Publicis Sapient. B.Tech CS (AI & ML), full-stack developer and machine-learning enthusiast.",
     type: "website",
@@ -36,7 +42,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={jetbrains.variable}>
+    <html lang="en" className={`${archivo.variable} ${jetbrains.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   );

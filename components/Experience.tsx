@@ -6,66 +6,60 @@ import SectionHeading from "./SectionHeading";
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-24 sm:py-32">
-      <div className="container-px relative z-10">
-        <SectionHeading index="02" title="Experience" />
+    <section id="experience" className="relative py-28 sm:py-40">
+      <div className="container-px">
+        <SectionHeading index="02" title="Work" hint="WHERE I'VE BEEN" />
 
-        <div className="space-y-8">
+        <div className="border-t border-fg/20">
           {experience.map((job, i) => (
-            <Reveal key={i} delay={i * 0.08}>
-              <article
-                className={`box-brut relative p-6 sm:p-8 ${
-                  job.current ? "border-accent" : ""
-                }`}
-              >
-                {/* corner index */}
-                <span className="absolute right-4 top-3 text-xs text-muted" aria-hidden>
-                  {"["}
-                  {String(i + 1).padStart(2, "0")}
-                  {"]"}
-                </span>
-
-                <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
-                  <h3 className="text-lg font-bold uppercase tracking-wide sm:text-xl">
-                    {job.company}
-                  </h3>
-                  {job.current && (
-                    <span className="flex items-center gap-1.5 border border-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.25em] text-accent">
-                      <span className="h-1.5 w-1.5 animate-blink rounded-full bg-accent" />
-                      Now
-                    </span>
-                  )}
-                </div>
-
-                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
-                  <span className="text-ink/85">{job.role}</span>
-                  <span aria-hidden>{"//"}</span>
-                  <span>{job.location}</span>
-                  <span aria-hidden>{"//"}</span>
-                  <span>{job.period}</span>
-                </div>
-
-                <p className="mt-5 max-w-3xl text-sm leading-relaxed text-muted">
-                  {job.summary}
-                </p>
-
-                <ul className="mt-5 space-y-2.5">
-                  {job.highlights.map((h, hi) => (
-                    <li key={hi} className="flex gap-3 text-sm leading-relaxed">
-                      <span className="shrink-0 text-accent" aria-hidden>
-                        {">"}
+            <Reveal key={i} delay={i * 0.06}>
+              <article className="grid gap-6 border-b border-fg/20 py-10 lg:grid-cols-[180px_1fr] lg:gap-14">
+                {/* ID / period column */}
+                <div>
+                  <div className="meta">
+                    №{String(i + 1).padStart(3, "0")}
+                    {job.current && (
+                      <span className="ml-3 inline-flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 animate-blink rounded-full bg-fg" />
+                        NOW
                       </span>
-                      <span>{h}</span>
-                    </li>
-                  ))}
-                </ul>
+                    )}
+                  </div>
+                  <div className="mt-3 font-mono text-xs text-fg/50">{job.period}</div>
+                  <div className="mt-1 font-mono text-xs text-fg/50">{job.location}</div>
+                </div>
 
-                <div className="mt-6 flex flex-wrap gap-x-3 gap-y-2 border-t border-dashed border-ink/40 pt-5">
-                  {job.tech.map((t) => (
-                    <span key={t} className="tag">
-                      {t.toLowerCase()}
-                    </span>
-                  ))}
+                <div>
+                  <h3 className="display text-3xl sm:text-4xl">{job.company}</h3>
+                  <div className="mt-2 font-mono text-xs uppercase tracking-[0.2em] text-fg/60">
+                    {job.role}
+                  </div>
+
+                  <p className="mt-6 max-w-2xl text-sm leading-relaxed text-fg/60 sm:text-base">
+                    {job.summary}
+                  </p>
+
+                  <ul className="mt-6 max-w-3xl space-y-3">
+                    {job.highlights.map((h, hi) => (
+                      <li key={hi} className="flex gap-4 text-sm leading-relaxed">
+                        <span className="meta mt-0.5 shrink-0">
+                          {String(hi + 1).padStart(2, "0")}
+                        </span>
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-8 flex flex-wrap gap-2">
+                    {job.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-full border border-fg/30 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.15em] text-fg/70"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </article>
             </Reveal>

@@ -1,4 +1,3 @@
-import AsciiField from "@/components/AsciiField";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -11,9 +10,8 @@ import Contact from "@/components/Contact";
 export default function Home() {
   return (
     <>
-      <AsciiField />
       <Navbar />
-      <main className="relative z-10">
+      <main>
         <Hero />
         <About />
         <Experience />

@@ -3,8 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --paper: #ebe7dd;
-  --ink: #161512;
+  /* warm paper-white / near-black — rgb triplets so Tailwind alpha works */
+  --bg: 242 240 234;
+  --fg: 14 14 12;
+}
+
+html[data-theme="dark"] {
+  --bg: 14 14 12;
+  --fg: 242 240 234;
 }
 
 * {
@@ -16,119 +22,86 @@ html {
 }
 
 body {
-  background-color: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-mono), ui-monospace, monospace;
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
-/* Selection: full invert */
 ::selection {
-  background: var(--ink);
-  color: var(--paper);
+  background: rgb(var(--fg));
+  color: rgb(var(--bg));
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--paper);
+  background: rgb(var(--bg));
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--ink);
+  background: rgb(var(--fg));
 }
 
 @layer components {
   .container-px {
-    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+    @apply mx-auto w-full max-w-[88rem] px-5 sm:px-10;
   }
 
-  /* Bracket-style brutalist button */
-  .btn-brut {
-    @apply inline-flex items-center gap-2 border border-ink bg-transparent px-5 py-3 text-xs font-medium uppercase tracking-[0.2em] text-ink transition-colors duration-200;
-  }
-  .btn-brut:hover {
-    @apply bg-ink text-paper;
-  }
-  .btn-brut-solid {
-    @apply inline-flex items-center gap-2 border border-ink bg-ink px-5 py-3 text-xs font-medium uppercase tracking-[0.2em] text-paper transition-colors duration-200;
-  }
-  .btn-brut-solid:hover {
-    @apply bg-accent border-accent text-paper;
+  /* tiny mono meta label */
+  .meta {
+    @apply font-mono text-[11px] uppercase tracking-[0.25em] text-fg/50;
   }
 
-  /* Bordered box */
-  .box-brut {
-    @apply border border-ink/80 bg-paper/80 backdrop-blur-[2px];
+  /* pill button */
+  .btn-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-fg px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] transition-colors duration-200;
+  }
+  .btn-pill:hover {
+    @apply bg-fg text-bg;
+  }
+  .btn-pill-solid {
+    @apply inline-flex items-center gap-2 rounded-full border border-fg bg-fg px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-bg transition-opacity duration-200;
+  }
+  .btn-pill-solid:hover {
+    @apply opacity-80;
   }
 
-  /* Small bracket tag: [python] */
-  .tag {
-    @apply inline-flex items-center text-xs lowercase tracking-wide text-ink/70 transition-colors;
+  /* underline sweep on links */
+  .link-sweep {
+    background-image: linear-gradient(rgb(var(--fg)), rgb(var(--fg)));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease;
   }
-  .tag::before {
-    content: "[";
-    margin-right: 1px;
-  }
-  .tag::after {
-    content: "]";
-    margin-left: 1px;
-  }
-  .tag:hover {
-    @apply text-accent;
-  }
-
-  /* Tiny uppercase label */
-  .label-xs {
-    @apply text-[11px] uppercase tracking-[0.3em] text-muted;
-  }
-
-  /* Dotted leader row (NAME ........ VALUE) */
-  .leader-row {
-    @apply flex items-baseline gap-3 border-b border-dotted border-ink/40 py-3;
-  }
-  .leader-fill {
-    @apply flex-1 border-b border-dotted border-ink/40 -translate-y-1;
+  .link-sweep:hover {
+    background-size: 100% 1px;
   }
 }
 
-/* Blinking block cursor */
-.cursor-block::after {
-  content: "█";
-  margin-left: 0.08em;
-  animation: blink 1.1s steps(1) infinite;
-  color: #ff4d00;
+/* Big display type */
+.display {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  text-transform: uppercase;
 }
 
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-/* Invert-on-hover card */
-.invert-hover {
+/* Invert-fill row hover */
+.row-invert {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
-.invert-hover:hover {
-  background: var(--ink);
-  color: var(--paper);
+.row-invert:hover {
+  background: rgb(var(--fg));
+  color: rgb(var(--bg));
 }
-.invert-hover:hover .tag {
-  color: rgba(235, 231, 221, 0.75);
-}
-.invert-hover:hover .label-xs,
-.invert-hover:hover .text-muted {
-  color: rgba(235, 231, 221, 0.6);
-}
-.invert-hover:hover .keep-accent {
-  color: #ff4d00;
+.row-invert:hover .meta,
+.row-invert:hover .text-fg\/50,
+.row-invert:hover .text-fg\/60 {
+  color: rgb(var(--bg) / 0.6);
 }
 
 @media (prefers-reduced-motion: reduce) {

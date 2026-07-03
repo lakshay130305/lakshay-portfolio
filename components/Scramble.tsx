@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 
-const GLYPHS = "/\\|-_=+*#<>[]{}";
+/** Text resolves out of a stream of 0s and 1s — binary decode effect. */
+const GLYPHS = "01";
 
 export default function Scramble({
   text,

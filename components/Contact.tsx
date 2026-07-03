@@ -2,72 +2,95 @@
 
 import { profile } from "@/lib/data";
 import Reveal from "./Reveal";
-import SectionHeading from "./SectionHeading";
+import { BinaryStrip, Star } from "./Binary";
 import Scramble from "./Scramble";
+
+function BigMarquee() {
+  const items = Array.from({ length: 6 });
+  return (
+    <a href={`mailto:${profile.email}`} className="group block overflow-hidden border-y border-fg/20 py-6">
+      <div className="flex w-max animate-marquee items-center transition-[animation-duration]">
+        {items.map((_, i) => (
+          <span key={i} className="flex items-center">
+            <span className="display whitespace-nowrap px-8 text-6xl transition-colors group-hover:text-fg/60 sm:text-8xl">
+              Let&apos;s work together
+            </span>
+            <Star className="h-10 w-10 shrink-0 animate-spin-slow sm:h-14 sm:w-14" />
+          </span>
+        ))}
+      </div>
+    </a>
+  );
+}
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative py-24 sm:py-32">
-      <div className="container-px relative z-10">
-        <SectionHeading index="06" title="Contact" />
-
+    <section id="contact" className="relative pt-28 sm:pt-40">
+      <div className="container-px">
         <Reveal>
-          <p className="max-w-3xl text-2xl font-bold uppercase leading-snug tracking-tight sm:text-4xl">
-            Let&apos;s build something{" "}
-            <span className="bg-accent px-2 text-paper">remarkable</span> together.
-          </p>
-          <p className="mt-5 max-w-lg text-sm leading-relaxed text-muted">
-            I&apos;m open to internships, collaborations and interesting problems.
-            My inbox is always open.
-          </p>
-        </Reveal>
-
-        {/* Giant mail link */}
-        <Reveal delay={0.1}>
-          <a
-            href={`mailto:${profile.email}`}
-            className="invert-hover box-brut mt-10 block p-6 sm:p-8"
-          >
-            <div className="label-xs mb-3">{"//"} say hello</div>
-            <div className="break-all text-lg font-bold sm:text-2xl lg:text-3xl">
-              <Scramble text={profile.email} speed={16} />{" "}
-              <span className="keep-accent text-accent" aria-hidden>↗</span>
-            </div>
-          </a>
-        </Reveal>
-
-        {/* Socials grid */}
-        <Reveal delay={0.18}>
-          <div className="mt-5 grid gap-5 sm:grid-cols-3">
-            {profile.socials
-              .filter((s) => s.label !== "Email")
-              .map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target={s.href.startsWith("http") ? "_blank" : undefined}
-                  rel="noopener noreferrer"
-                  className="invert-hover box-brut flex items-center justify-between p-5"
-                >
-                  <div>
-                    <div className="label-xs">{s.label}</div>
-                    <div className="mt-1.5 text-sm font-medium">{s.handle}</div>
-                  </div>
-                  <span className="keep-accent text-accent" aria-hidden>↗</span>
-                </a>
-              ))}
+          <div className="flex items-baseline justify-between gap-6 border-b border-fg/20 pb-4">
+            <span className="meta">
+              (06) — <Scramble text="CONTACT" speed={22} />
+            </span>
+            <span className="meta hidden sm:block">INBOX ALWAYS OPEN</span>
           </div>
         </Reveal>
+      </div>
 
-        {/* Footer */}
-        <footer className="mt-20 border-t border-ink/70 pt-6">
-          <div className="flex flex-col items-center justify-between gap-3 text-xs uppercase tracking-[0.2em] text-muted sm:flex-row">
-            <span>
-              {"//---"} © {profile.name} {"---//"}
+      {/* giant marquee CTA */}
+      <Reveal className="mt-16">
+        <BigMarquee />
+      </Reveal>
+
+      <div className="container-px">
+        <div className="mt-16 grid gap-12 md:grid-cols-2">
+          <Reveal>
+            <p className="max-w-md text-base leading-relaxed text-fg/60 sm:text-lg">
+              Open to internships, collaborations and interesting problems.
+              Drop me a line — I reply fast.
+            </p>
+            <a
+              href={`mailto:${profile.email}`}
+              className="link-sweep mt-6 inline-block break-all text-lg font-bold tracking-tight sm:text-2xl"
+            >
+              {profile.email}
+            </a>
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            <div>
+              {profile.socials
+                .filter((s) => s.label !== "Email")
+                .map((s, i) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target={s.href.startsWith("http") ? "_blank" : undefined}
+                    rel="noopener noreferrer"
+                    className="row-invert flex items-baseline justify-between gap-6 border-b border-fg/20 px-2 py-5 first:border-t"
+                  >
+                    <span className="meta">
+                      {String(i + 1).padStart(2, "0")} / {s.label}
+                    </span>
+                    <span className="font-mono text-sm">
+                      {s.handle} ↗
+                    </span>
+                  </a>
+                ))}
+            </div>
+          </Reveal>
+        </div>
+
+        {/* footer */}
+        <footer className="mt-24 pb-10">
+          <BinaryStrip rows={2} />
+          <div className="mt-8 flex flex-col items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-fg/50 sm:flex-row">
+            <span>© {profile.name}</span>
+            <span className="flex items-center gap-2">
+              Coding my way since 2023 <Star className="h-2.5 w-2.5" />
             </span>
-            <span>Next.js / Tailwind / Framer Motion</span>
-            <a href="#top" className="transition-colors hover:text-accent">
-              [back to top ↑]
+            <a href="#top" className="link-sweep">
+              Back to top ↑
             </a>
           </div>
         </footer>

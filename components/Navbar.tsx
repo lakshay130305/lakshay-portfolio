@@ -1,81 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 const links = [
-  { label: "About", href: "#about", index: "01" },
-  { label: "Work", href: "#experience", index: "02" },
-  { label: "Projects", href: "#projects", index: "03" },
-  { label: "Stack", href: "#skills", index: "04" },
-  { label: "Education", href: "#education", index: "05" },
-  { label: "Contact", href: "#contact", index: "06" },
+  { label: "About", href: "#about" },
+  { label: "Work", href: "#experience" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
+  const [dark, setDark] = useState(false);
   const [open, setOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+  }, [dark]);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/80 bg-paper/90 backdrop-blur-sm">
-      <nav className="container-px flex h-14 items-center justify-between gap-4">
-        <a href="#top" className="shrink-0 text-sm font-bold tracking-wide">
-          {"//---"} <span className="text-accent">LK</span> {"---//"}
+    <header className="fixed inset-x-0 top-0 z-50 bg-bg/85 backdrop-blur-md">
+      <nav className="container-px flex h-16 items-center justify-between">
+        <a href="#top" className="font-mono text-xs uppercase tracking-[0.2em]">
+          Lakshay Kathpalia
+          <span className="ml-2 hidden text-fg/40 sm:inline">— AI/ML Dev</span>
         </a>
 
-        <div className="hidden items-center gap-6 lg:flex">
+        <div className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="group text-xs uppercase tracking-[0.2em] text-ink/70 transition-colors hover:text-ink"
-            >
-              <span className="mr-1.5 text-[10px] text-accent/80">{l.index}</span>
-              <span className="underline-offset-4 group-hover:underline">{l.label}</span>
-            </a>
-          ))}
-        </div>
-
-        <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href="/Lakshay-Kathpalia-Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs uppercase tracking-[0.2em] text-ink/70 transition-colors hover:text-accent"
-          >
-            [CV]
-          </a>
-          <a href="#contact" className="btn-brut-solid !px-4 !py-2">
-            Let&apos;s talk
-          </a>
-        </div>
-
-        <button
-          aria-label="Toggle menu"
-          onClick={() => setOpen((v) => !v)}
-          className="text-sm uppercase tracking-widest lg:hidden"
-        >
-          {open ? "[close]" : "[menu]"}
-        </button>
-      </nav>
-
-      {/* Mobile menu */}
-      <motion.div
-        initial={false}
-        animate={{ height: open ? "auto" : 0 }}
-        className="overflow-hidden border-ink/80 lg:hidden"
-        style={{ borderTopWidth: open ? 1 : 0 }}
-      >
-        <div className="container-px flex flex-col py-3">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="border-b border-dotted border-ink/30 py-3 text-sm uppercase tracking-[0.2em] last:border-0"
-            >
-              <span className="mr-2 text-xs text-accent">{l.index}</span>
+            <a key={l.href} href={l.href} className="link-sweep font-mono text-xs uppercase tracking-[0.2em]">
               {l.label}
             </a>
           ))}
@@ -83,15 +38,68 @@ export default function Navbar() {
             href="/Lakshay-Kathpalia-Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="py-3 text-sm uppercase tracking-[0.2em] text-accent"
+            className="link-sweep font-mono text-xs uppercase tracking-[0.2em] text-fg/60"
           >
-            [Download CV]
+            CV ↗
+          </a>
+          {/* contrast toggle */}
+          <button
+            aria-label="Toggle contrast"
+            onClick={() => setDark((v) => !v)}
+            className="grid h-8 w-8 place-items-center rounded-full border border-fg text-[10px] transition-colors hover:bg-fg hover:text-bg"
+          >
+            ◐
+          </button>
+        </div>
+
+        <div className="flex items-center gap-4 md:hidden">
+          <button
+            aria-label="Toggle contrast"
+            onClick={() => setDark((v) => !v)}
+            className="grid h-8 w-8 place-items-center rounded-full border border-fg text-[10px]"
+          >
+            ◐
+          </button>
+          <button
+            aria-label="Toggle menu"
+            onClick={() => setOpen((v) => !v)}
+            className="font-mono text-xs uppercase tracking-[0.2em]"
+          >
+            {open ? "Close" : "Menu"}
+          </button>
+        </div>
+      </nav>
+
+      {/* mobile menu */}
+      <motion.div
+        initial={false}
+        animate={{ height: open ? "auto" : 0 }}
+        className="overflow-hidden border-fg/15 md:hidden"
+        style={{ borderTopWidth: open ? 1 : 0 }}
+      >
+        <div className="container-px flex flex-col py-2">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="border-b border-fg/10 py-3 font-mono text-sm uppercase tracking-[0.2em] last:border-0"
+            >
+              {l.label}
+            </a>
+          ))}
+          <a
+            href="/Lakshay-Kathpalia-Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-3 font-mono text-sm uppercase tracking-[0.2em] text-fg/60"
+          >
+            Download CV ↗
           </a>
         </div>
       </motion.div>
 
-      {/* Scroll progress */}
-      <motion.div style={{ scaleX: progress }} className="h-[2px] origin-left bg-accent" />
+      <motion.div style={{ scaleX: progress }} className="h-px origin-left bg-fg" />
     </header>
   );
 }

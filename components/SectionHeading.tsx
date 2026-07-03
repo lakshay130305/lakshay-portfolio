@@ -1,7 +1,7 @@
 "use client";
 
-import Scramble from "./Scramble";
 import Reveal from "./Reveal";
+import Scramble from "./Scramble";
 
 export default function SectionHeading({
   index,
@@ -13,19 +13,14 @@ export default function SectionHeading({
   hint?: string;
 }) {
   return (
-    <Reveal className="mb-12 sm:mb-16">
-      {/* //--- 01 / TITLE ---------------------// */}
-      <div className="flex items-center gap-3 text-ink/80">
-        <span className="shrink-0 text-sm">{"//---"}</span>
-        <span className="shrink-0 text-sm text-accent">{index}</span>
-        <span className="shrink-0 text-sm">/</span>
-        <h2 className="shrink-0 text-sm font-bold uppercase tracking-[0.35em]">
-          <Scramble text={title} />
-        </h2>
-        <span className="h-px flex-1 border-t border-dashed border-ink/40" aria-hidden />
-        <span className="shrink-0 text-sm">{"//"}</span>
+    <Reveal className="mb-14 sm:mb-20">
+      <div className="flex items-baseline justify-between gap-6 border-b border-fg/20 pb-4">
+        <span className="meta">
+          ({index}) — <Scramble text={title.toUpperCase()} speed={22} />
+        </span>
+        {hint && <span className="meta hidden text-right sm:block">{hint}</span>}
       </div>
-      {hint && <p className="mt-4 max-w-md text-sm text-muted">{hint}</p>}
+      <h2 className="display mt-8 text-5xl sm:text-7xl lg:text-8xl">{title}</h2>
     </Reveal>
   );
 }

@@ -3,16 +3,28 @@
 import { profile, marqueeSkills } from "@/lib/data";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
+import { BinaryStrip, Star } from "./Binary";
 
-function Marquee({ reverse = false }: { reverse?: boolean }) {
+const facts = [
+  { k: "Currently", v: "AI/ML Intern @ Publicis Sapient" },
+  { k: "Focus", v: "LLMs & Knowledge Graphs" },
+  { k: "Based in", v: "Gurgaon, India" },
+  { k: "Degree", v: "B.Tech CS (AI & ML) — 2027" },
+  { k: "Also learning", v: "VLSI Physical Design" },
+  { k: "Off-screen", v: "Badminton / Golf" },
+];
+
+function Ticker() {
   const items = [...marqueeSkills, ...marqueeSkills];
   return (
-    <div className="relative flex overflow-hidden py-2.5">
-      <div className={`flex shrink-0 items-center ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}>
+    <div className="relative overflow-hidden border-y border-fg/20 py-4">
+      <div className="flex w-max animate-marquee-slow items-center">
         {items.map((s, i) => (
-          <span key={i} className="flex items-center whitespace-nowrap text-xs uppercase tracking-[0.2em] text-ink/60">
-            <span className="px-4">{s}</span>
-            <span className="text-accent/70" aria-hidden>{"///"}</span>
+          <span key={i} className="flex items-center whitespace-nowrap">
+            <span className="px-6 font-mono text-sm uppercase tracking-[0.25em] text-fg/60">
+              {s}
+            </span>
+            <Star className="h-3 w-3 shrink-0 text-fg/40" />
           </span>
         ))}
       </div>
@@ -20,40 +32,35 @@ function Marquee({ reverse = false }: { reverse?: boolean }) {
   );
 }
 
-const facts = [
-  { k: "Now at", v: "Publicis Sapient" },
-  { k: "Focus", v: "LLMs & Knowledge Graphs" },
-  { k: "Location", v: "Gurgaon, India" },
-  { k: "Degree", v: "B.Tech CS (AI & ML), 2027" },
-  { k: "Learning", v: "VLSI Physical Design" },
-  { k: "Interests", v: "Badminton / Golf" },
-];
-
 export default function About() {
   return (
-    <section id="about" className="relative py-24 sm:py-32">
-      <div className="container-px relative z-10">
-        <SectionHeading index="01" title="About" />
+    <section id="about" className="relative py-28 sm:py-40">
+      <div className="container-px">
+        <SectionHeading index="01" title="About" hint="WHO IS THIS GUY" />
 
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-20">
+        <div className="grid gap-14 lg:grid-cols-[1.3fr_1fr] lg:gap-24">
           <Reveal>
-            <p className="text-lg leading-relaxed sm:text-xl">
-              Turning messy real-world problems into{" "}
-              <span className="bg-ink px-1.5 text-paper">intelligent software</span>.
+            <p className="text-xl font-medium leading-snug tracking-tight sm:text-3xl">
+              I collaborate with teams to turn messy real-world data into
+              intelligent software — from LLM extraction pipelines to
+              full-stack products.
             </p>
-            <p className="mt-6 text-sm leading-relaxed text-muted sm:text-base">
+            <p className="mt-8 max-w-xl text-sm leading-relaxed text-fg/60 sm:text-base">
               {profile.about}
             </p>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="box-brut p-6">
-              <div className="label-xs mb-2">{"//"} quick facts</div>
-              {facts.map((f) => (
-                <div key={f.k} className="leader-row">
-                  <span className="label-xs shrink-0 normal-case tracking-[0.15em]">{f.k}</span>
-                  <span className="leader-fill" aria-hidden />
-                  <span className="shrink-0 text-sm font-medium">{f.v}</span>
+            <div>
+              {facts.map((f, i) => (
+                <div
+                  key={f.k}
+                  className="flex items-baseline justify-between gap-6 border-b border-fg/15 py-4"
+                >
+                  <span className="meta shrink-0">
+                    {String(i + 1).padStart(2, "0")} / {f.k}
+                  </span>
+                  <span className="text-right text-sm font-medium">{f.v}</span>
                 </div>
               ))}
             </div>
@@ -61,11 +68,12 @@ export default function About() {
         </div>
       </div>
 
-      {/* skill ticker band */}
-      <div className="relative z-10 mt-20 border-y border-ink/70 bg-paper/70">
-        <Marquee />
-        <div className="border-t border-dashed border-ink/40" />
-        <Marquee reverse />
+      <div className="mt-24">
+        <Ticker />
+      </div>
+
+      <div className="container-px mt-10">
+        <BinaryStrip />
       </div>
     </section>
   );

@@ -3,31 +3,29 @@
 import { skillGroups } from "@/lib/data";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
+import { BinaryStrip } from "./Binary";
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-24 sm:py-32">
-      <div className="container-px relative z-10">
-        <SectionHeading index="04" title="Stack" />
+    <section id="skills" className="relative py-28 sm:py-40">
+      <div className="container-px">
+        <SectionHeading index="04" title="Stack" hint="TOOLS OF THE TRADE" />
 
-        <div className="box-brut grid divide-y divide-ink/50 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
+        <div className="grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
           {skillGroups.map((group, i) => (
-            <Reveal key={group.title} delay={i * 0.06} className="sm:[&:nth-child(3)]:border-t sm:[&:nth-child(4)]:border-t sm:[&:nth-child(3)]:border-ink/50 sm:[&:nth-child(4)]:border-ink/50 lg:[&:nth-child(n)]:!border-t-0">
-              <div className="h-full p-6">
-                <div className="label-xs mb-5">
-                  {"//"} {String(i + 1).padStart(2, "0")}
+            <Reveal key={group.title} delay={i * 0.05}>
+              <div>
+                <div className="meta border-b border-fg/20 pb-3">
+                  ({String(i + 1).padStart(2, "0")}) {group.title}
                 </div>
-                <h3 className="text-sm font-bold uppercase tracking-[0.2em]">
-                  {group.title}
-                </h3>
                 <ul className="mt-5 space-y-2.5">
                   {group.items.map((item) => (
                     <li
                       key={item}
-                      className="group flex items-center gap-2 text-sm text-ink/75 transition-colors hover:text-accent"
+                      className="group flex cursor-default items-baseline gap-3 text-sm font-medium transition-transform duration-200 hover:translate-x-1.5 sm:text-base"
                     >
-                      <span className="text-accent/70 transition-transform group-hover:translate-x-1" aria-hidden>
-                        —
+                      <span className="font-mono text-[10px] text-fg/40 transition-colors group-hover:text-fg">
+                        →
                       </span>
                       {item}
                     </li>
@@ -36,6 +34,10 @@ export default function Skills() {
               </div>
             </Reveal>
           ))}
+        </div>
+
+        <div className="mt-20">
+          <BinaryStrip />
         </div>
       </div>
     </section>
