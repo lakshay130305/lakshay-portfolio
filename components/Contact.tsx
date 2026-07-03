@@ -1,24 +1,70 @@
 "use client";
 
+import { useRef } from "react";
+import {
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from "framer-motion";
 import { profile } from "@/lib/data";
 import Reveal from "./Reveal";
 import { BinaryStrip, Star } from "./Binary";
 import Scramble from "./Scramble";
 
+/** Wraps v into [min, max) — keeps the marquee looping seamlessly. */
+const wrap = (min: number, max: number, v: number) => {
+  const range = max - min;
+  return min + (((v - min) % range) + range) % range;
+};
+
+/** JS-driven marquee: always moving, speeds up with scroll velocity and
+ *  reverses direction when you scroll back up. */
 function BigMarquee() {
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 380 });
+  const velocityFactor = useTransform(smoothVelocity, [-1200, 1200], [-4, 4], {
+    clamp: false,
+  });
+  const direction = useRef(-1);
+
+  useAnimationFrame((_, delta) => {
+    const vf = velocityFactor.get();
+    // scroll direction steers marquee direction
+    if (vf < -0.1) direction.current = 1;
+    else if (vf > 0.1) direction.current = -1;
+
+    let moveBy = direction.current * 2.4 * (delta / 1000); // % per second base
+    moveBy += moveBy * Math.abs(vf); // scroll velocity boost
+    baseX.set(baseX.get() + moveBy);
+  });
+
+  const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
+
   const items = Array.from({ length: 6 });
   return (
     <a href={`mailto:${profile.email}`} className="group block overflow-hidden border-y border-fg/20 py-6">
-      <div className="flex w-max animate-marquee items-center transition-[animation-duration]">
+      <motion.div style={{ x }} className="flex w-max items-center">
         {items.map((_, i) => (
           <span key={i} className="flex items-center">
             <span className="display whitespace-nowrap px-8 text-6xl transition-colors group-hover:text-fg/60 sm:text-8xl">
               Let&apos;s work together
             </span>
-            <Star className="h-10 w-10 shrink-0 animate-spin-slow sm:h-14 sm:w-14" />
+            <motion.span
+              className="inline-flex shrink-0"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            >
+              <Star className="h-10 w-10 sm:h-14 sm:w-14" />
+            </motion.span>
           </span>
         ))}
-      </div>
+      </motion.div>
     </a>
   );
 }

@@ -1,9 +1,15 @@
 "use client";
 
+import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
 import { profile, marqueeSkills } from "@/lib/data";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import { BinaryStrip, Star } from "./Binary";
+
+const wrap = (min: number, max: number, v: number) => {
+  const range = max - min;
+  return min + (((v - min) % range) + range) % range;
+};
 
 const facts = [
   { k: "Currently", v: "AI/ML Intern @ Publicis Sapient" },
@@ -15,10 +21,16 @@ const facts = [
 ];
 
 function Ticker() {
+  const baseX = useMotionValue(0);
+  useAnimationFrame((_, delta) => {
+    baseX.set(baseX.get() - 1.6 * (delta / 1000)); // % per second
+  });
+  const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
+
   const items = [...marqueeSkills, ...marqueeSkills];
   return (
     <div className="relative overflow-hidden border-y border-fg/20 py-4">
-      <div className="flex w-max animate-marquee-slow items-center">
+      <motion.div style={{ x }} className="flex w-max items-center">
         {items.map((s, i) => (
           <span key={i} className="flex items-center whitespace-nowrap">
             <span className="px-6 font-mono text-sm uppercase tracking-[0.25em] text-fg/60">
@@ -27,7 +39,7 @@ function Ticker() {
             <Star className="h-3 w-3 shrink-0 text-fg/40" />
           </span>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
