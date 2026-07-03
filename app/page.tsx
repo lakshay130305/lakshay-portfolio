@@ -1,3 +1,4 @@
+import Cursor from "@/components/Cursor";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -10,6 +11,7 @@ import Contact from "@/components/Contact";
 export default function Home() {
   return (
     <>
+      <Cursor />
       <Navbar />
       <main>
         <Hero />

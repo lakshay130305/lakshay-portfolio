@@ -104,6 +104,38 @@ body {
   color: rgb(var(--bg) / 0.6);
 }
 
+/* ── Custom cursor ──────────────────────────────────────── */
+/* hide the native cursor only when the custom one is mounted */
+html.custom-cursor,
+html.custom-cursor a,
+html.custom-cursor button,
+html.custom-cursor [role="button"] {
+  cursor: none;
+}
+
+/* binary bits dripping off the cursor */
+.cursor-bit {
+  position: fixed;
+  z-index: 99;
+  pointer-events: none;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  color: rgb(var(--fg) / 0.65);
+  transform: translate(-50%, -50%);
+  animation: bit-fade 0.9s ease-out forwards;
+}
+
+@keyframes bit-fade {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 26px)) scale(0.55);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
