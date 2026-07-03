@@ -2,6 +2,7 @@
 
 import Reveal from "./Reveal";
 import Scramble from "./Scramble";
+import PlayText from "./PlayText";
 
 export default function SectionHeading({
   index,
@@ -20,7 +21,9 @@ export default function SectionHeading({
         </span>
         {hint && <span className="meta hidden text-right sm:block">{hint}</span>}
       </div>
-      <h2 className="display mt-8 text-5xl sm:text-7xl lg:text-8xl">{title}</h2>
+      <h2 className="display mt-8 text-5xl sm:text-7xl lg:text-8xl">
+        <PlayText text={title} />
+      </h2>
     </Reveal>
   );
 }

@@ -13,6 +13,7 @@ const links = [
 export default function Navbar() {
   const [dark, setDark] = useState(false);
   const [open, setOpen] = useState(false);
+  const [bin, setBin] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
 
@@ -23,9 +24,19 @@ export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-bg/85 backdrop-blur-md">
       <nav className="container-px flex h-16 items-center justify-between">
-        <a href="#top" className="font-mono text-xs uppercase tracking-[0.2em]">
-          Lakshay Kathpalia
-          <span className="ml-2 hidden text-fg/40 sm:inline">— AI/ML Dev</span>
+        {/* hover easter egg: name flips to "LK" in binary (same char count) */}
+        <a
+          href="#top"
+          className="font-mono text-xs uppercase tracking-[0.2em]"
+          onMouseEnter={() => setBin(true)}
+          onMouseLeave={() => setBin(false)}
+        >
+          <span aria-label="Lakshay Kathpalia">
+            {bin ? "01001100 01001011" : "Lakshay Kathpalia"}
+          </span>
+          <span className="ml-2 hidden text-fg/40 sm:inline">
+            {bin ? "— DECODED: LK" : "— AI/ML Dev"}
+          </span>
         </a>
 
         <div className="hidden items-center gap-8 md:flex">

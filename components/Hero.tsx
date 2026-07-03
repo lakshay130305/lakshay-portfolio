@@ -1,15 +1,14 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { profile, stats } from "@/lib/data";
 import { BinaryStrip, Star } from "./Binary";
 import Scramble from "./Scramble";
+import PlayText from "./PlayText";
 
-const lineAnim = {
-  initial: { y: "110%" },
-  animate: { y: "0%" },
-};
-
+/** Line entrance with a clip reveal; releases overflow afterwards so
+ *  hover animations aren't clipped. */
 function RevealLine({
   children,
   delay = 0,
@@ -19,17 +18,68 @@ function RevealLine({
   delay?: number;
   className?: string;
 }) {
+  const [done, setDone] = useState(false);
   return (
-    <span className={`block overflow-hidden ${className}`}>
+    <span className={`block ${done ? "" : "overflow-hidden"} ${className}`}>
       <motion.span
         className="block"
-        variants={lineAnim}
-        initial="initial"
-        animate="animate"
+        initial={{ y: "110%" }}
+        animate={{ y: "0%" }}
         transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
+        onAnimationComplete={() => setDone(true)}
       >
         {children}
       </motion.span>
+    </span>
+  );
+}
+
+type BurstBit = { id: number; dx: number; dy: number; ch: string };
+
+/** The hero star — click it and it detonates into a firework of 0s and 1s. */
+function StarBurst() {
+  const [bits, setBits] = useState<BurstBit[]>([]);
+  const [spin, setSpin] = useState(0);
+  const idRef = useRef(0);
+
+  const boom = () => {
+    setSpin((s) => s + 720);
+    const batch: BurstBit[] = Array.from({ length: 16 }, () => ({
+      id: idRef.current++,
+      dx: (Math.random() - 0.5) * 320,
+      dy: (Math.random() - 0.5) * 320,
+      ch: Math.random() > 0.5 ? "1" : "0",
+    }));
+    setBits((b) => [...b, ...batch]);
+    setTimeout(() => {
+      setBits((b) => b.filter((x) => !batch.includes(x)));
+    }, 900);
+  };
+
+  return (
+    <span className="relative inline-flex" data-cursor="hover">
+      <motion.button
+        aria-label="Do not press this star"
+        onClick={boom}
+        animate={{ rotate: spin }}
+        transition={{ type: "spring", stiffness: 60, damping: 14 }}
+        className="inline-flex"
+      >
+        <Star className="h-[0.6em] w-[0.6em] shrink-0 animate-spin-slow" />
+      </motion.button>
+
+      {bits.map((b) => (
+        <motion.span
+          key={b.id}
+          className="pointer-events-none absolute left-1/2 top-1/2 z-10 font-mono text-lg font-bold"
+          initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+          animate={{ x: b.dx, y: b.dy, opacity: 0, scale: 0.5, rotate: b.dx * 0.6 }}
+          transition={{ duration: 0.85, ease: "easeOut" }}
+          aria-hidden
+        >
+          {b.ch}
+        </motion.span>
+      ))}
     </span>
   );
 }
@@ -46,18 +96,20 @@ export default function Hero() {
           className="mb-8 flex flex-wrap items-center justify-between gap-3"
         >
           <span className="meta">
-            <Scramble text="AI/ML INTERN @ PUBLICIS SAPIENT" speed={18} />
+            <Scramble text="AI/ML DEVELOPER — INTERN @ PUBLICIS SAPIENT" speed={16} />
           </span>
-          <span className="meta hidden sm:block">EST. 2005 — GURGAON, IN</span>
+          <span className="meta hidden sm:block">GURGAON, IN</span>
         </motion.div>
 
-        {/* giant headline */}
-        <h1 className="display text-[15vw] leading-[0.9] sm:text-[13vw] lg:text-[11rem]">
-          <RevealLine delay={0.1}>AI/ML</RevealLine>
+        {/* giant name — every letter is alive */}
+        <h1 className="display text-[14vw] leading-[0.9] sm:text-[12.5vw] lg:text-[10.5rem]">
+          <RevealLine delay={0.1}>
+            <PlayText text="LAKSHAY" />
+          </RevealLine>
           <RevealLine delay={0.22}>
-            <span className="inline-flex items-center gap-[0.12em]">
-              <Star className="inline-block h-[0.62em] w-[0.62em] shrink-0 animate-spin-slow" />
-              <span>Developer</span>
+            <span className="inline-flex items-center gap-[0.14em]">
+              <StarBurst />
+              <PlayText text="KATHPALIA" />
             </span>
           </RevealLine>
         </h1>

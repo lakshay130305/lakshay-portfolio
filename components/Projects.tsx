@@ -4,6 +4,7 @@ import { projects } from "@/lib/data";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import { Star } from "./Binary";
+import PlayText from "./PlayText";
 
 export default function Projects() {
   return (
@@ -26,7 +27,7 @@ export default function Projects() {
 
                   <div>
                     <h3 className="display flex items-center gap-4 text-4xl sm:text-6xl">
-                      {p.title}
+                      <PlayText text={p.title} />
                       <Star className="h-[0.4em] w-[0.4em] shrink-0 opacity-0 transition-all duration-300 group-hover:rotate-90 group-hover:opacity-100" />
                     </h3>
                     <div className="mt-2 font-mono text-xs uppercase tracking-[0.25em] text-fg/60">
