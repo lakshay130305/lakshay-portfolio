@@ -83,10 +83,12 @@ export default function Hero() {
               <span className="relative z-10 transition-transform group-hover:translate-x-1">→</span>
             </a>
             <a
-              href="#contact"
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/5"
             >
-              Get in touch
+              <span>↓</span> Download CV
             </a>
             <div className="flex items-center gap-1 text-sm text-slate-500">
               <span className="text-slate-400">📍</span> {profile.location}

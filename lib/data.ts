@@ -7,6 +7,7 @@ export const profile = {
   location: "Gurgaon, India",
   email: "lakshay.kathpalia1305@gmail.com",
   phone: "+91 7065801360",
+  resumeUrl: "/Lakshay-Kathpalia-Resume.pdf",
   about:
     "I'm a Computer Science undergraduate specializing in Artificial Intelligence and Machine Learning, with hands-on experience shipping full-stack products. From building CRM platforms with Flask, React & MySQL to designing reinforcement-learning traffic systems and OCR-powered document pipelines, I love turning messy real-world problems into clean, intelligent software.",
   roles: [
@@ -17,8 +18,8 @@ export const profile = {
   ],
   socials: [
     { label: "Email", href: "mailto:lakshay.kathpalia1305@gmail.com", handle: "lakshay.kathpalia1305@gmail.com" },
-    { label: "GitHub", href: "https://github.com/", handle: "github.com/lakshay" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/", handle: "linkedin.com/in/lakshay" },
+    { label: "GitHub", href: "https://github.com/lakshay130305", handle: "github.com/lakshay130305" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/lakshay-kathpalia-692a24206", handle: "linkedin.com/in/lakshay-kathpalia" },
     { label: "Phone", href: "tel:+917065801360", handle: "+91 70658 01360" },
   ],
 };

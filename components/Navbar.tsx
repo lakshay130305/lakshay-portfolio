@@ -57,12 +57,22 @@ export default function Navbar() {
             ))}
           </div>
 
-          <a
-            href="#contact"
-            className="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink transition-transform hover:scale-105 md:inline-flex"
-          >
-            Let&apos;s talk
-          </a>
+          <div className="hidden items-center gap-2 md:flex">
+            <a
+              href="/Lakshay-Kathpalia-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/5"
+            >
+              Résumé
+            </a>
+            <a
+              href="#contact"
+              className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink transition-transform hover:scale-105"
+            >
+              Let&apos;s talk
+            </a>
+          </div>
 
           <button
             aria-label="Toggle menu"
