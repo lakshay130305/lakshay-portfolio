@@ -5,6 +5,7 @@ import { profile, marqueeSkills } from "@/lib/data";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import { BinaryStrip, Star } from "./Binary";
+import BinaryPortrait from "./BinaryPortrait";
 
 const wrap = (min: number, max: number, v: number) => {
   const range = max - min;
@@ -50,8 +51,13 @@ export default function About() {
       <div className="container-px">
         <SectionHeading index="01" title="About" hint="WHO IS THIS GUY" />
 
-        <div className="grid gap-14 lg:grid-cols-[1.3fr_1fr] lg:gap-24">
-          <Reveal>
+        <div className="grid gap-14 lg:grid-cols-[280px_1.2fr_1fr] lg:gap-16">
+          {/* binary portrait — hover to decode */}
+          <Reveal className="max-w-[320px]">
+            <BinaryPortrait src="/photo.png" alt="Portrait of Lakshay Kathpalia" />
+          </Reveal>
+
+          <Reveal delay={0.08}>
             <p className="text-xl font-medium leading-snug tracking-tight sm:text-3xl">
               I collaborate with teams to turn messy real-world data into
               intelligent software — from LLM extraction pipelines to
@@ -62,7 +68,7 @@ export default function About() {
             </p>
           </Reveal>
 
-          <Reveal delay={0.1}>
+          <Reveal delay={0.16}>
             <div>
               {facts.map((f, i) => (
                 <div
