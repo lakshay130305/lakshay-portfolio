@@ -8,25 +8,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#05060a",
-        surface: "#0b0d14",
-        accent: {
-          DEFAULT: "#a855f7",
-          cyan: "#22d3ee",
-          emerald: "#34d399",
-        },
+        paper: "#EBE7DD",
+        ink: "#161512",
+        muted: "#6f6a5d",
+        accent: "#FF4D00",
       },
       fontFamily: {
-        display: ["var(--font-display)", "sans-serif"],
-        sans: ["var(--font-sans)", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       animation: {
-        marquee: "marquee 40s linear infinite",
-        "marquee-reverse": "marquee-reverse 40s linear infinite",
-        "spin-slow": "spin 14s linear infinite",
-        float: "float 6s ease-in-out infinite",
-        shimmer: "shimmer 2.5s linear infinite",
+        marquee: "marquee 42s linear infinite",
+        "marquee-reverse": "marquee-reverse 42s linear infinite",
+        blink: "blink 1.1s steps(1) infinite",
       },
       keyframes: {
         marquee: {
@@ -37,13 +30,9 @@ const config: Config = {
           "0%": { transform: "translateX(-50%)" },
           "100%": { transform: "translateX(0)" },
         },
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-12px)" },
-        },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
+        blink: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0" },
         },
       },
     },

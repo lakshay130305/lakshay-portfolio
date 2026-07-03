@@ -1,75 +1,75 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { profile } from "@/lib/data";
 import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
+import Scramble from "./Scramble";
 
 export default function Contact() {
   return (
     <section id="contact" className="relative py-24 sm:py-32">
-      <div className="container-px">
+      <div className="container-px relative z-10">
+        <SectionHeading index="06" title="Contact" />
+
         <Reveal>
-          <div className="glass relative overflow-hidden rounded-[2.5rem] p-10 text-center sm:p-16">
-            {/* animated gradient glow */}
-            <motion.div
-              aria-hidden
-              className="absolute -top-1/2 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-violet-600/30 to-cyan-500/30 blur-3xl"
-              animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.8, 0.5] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
+          <p className="max-w-3xl text-2xl font-bold uppercase leading-snug tracking-tight sm:text-4xl">
+            Let&apos;s build something{" "}
+            <span className="bg-accent px-2 text-paper">remarkable</span> together.
+          </p>
+          <p className="mt-5 max-w-lg text-sm leading-relaxed text-muted">
+            I&apos;m open to internships, collaborations and interesting problems.
+            My inbox is always open.
+          </p>
+        </Reveal>
 
-            <div className="relative">
-              <span className="section-label justify-center">
-                <span className="h-px w-8 shimmer-line" /> Contact
-              </span>
-              <h2 className="mx-auto max-w-2xl font-display text-4xl font-bold leading-tight sm:text-5xl">
-                Let&apos;s build something <span className="gradient-text-animated">remarkable</span> together.
-              </h2>
-              <p className="mx-auto mt-5 max-w-lg text-lg text-slate-400">
-                I&apos;m open to internships, collaborations and interesting problems. My inbox is always open.
-              </p>
-
-              <div className="mt-8 flex flex-wrap justify-center gap-4">
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 px-7 py-3.5 font-semibold text-white shadow-lg shadow-violet-500/25 transition-transform hover:scale-105"
-                >
-                  ✉ Say hello
-                  <span className="transition-transform group-hover:translate-x-1">→</span>
-                </a>
-                <a
-                  href={`tel:${profile.phone.replace(/\s/g, "")}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white transition-colors hover:bg-white/5"
-                >
-                  📞 {profile.phone}
-                </a>
-              </div>
-
-              <div className="mx-auto mt-10 grid max-w-2xl gap-3 sm:grid-cols-2">
-                {profile.socials.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target={s.href.startsWith("http") ? "_blank" : undefined}
-                    rel="noopener noreferrer"
-                    className="glass-hover flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-5 py-4 text-left"
-                  >
-                    <div>
-                      <div className="text-xs uppercase tracking-wider text-violet-400/70">{s.label}</div>
-                      <div className="mt-0.5 text-sm font-medium text-white">{s.handle}</div>
-                    </div>
-                    <span className="text-slate-500 transition-transform group-hover:translate-x-1">↗</span>
-                  </a>
-                ))}
-              </div>
+        {/* Giant mail link */}
+        <Reveal delay={0.1}>
+          <a
+            href={`mailto:${profile.email}`}
+            className="invert-hover box-brut mt-10 block p-6 sm:p-8"
+          >
+            <div className="label-xs mb-3">{"//"} say hello</div>
+            <div className="break-all text-lg font-bold sm:text-2xl lg:text-3xl">
+              <Scramble text={profile.email} speed={16} />{" "}
+              <span className="keep-accent text-accent" aria-hidden>↗</span>
             </div>
+          </a>
+        </Reveal>
+
+        {/* Socials grid */}
+        <Reveal delay={0.18}>
+          <div className="mt-5 grid gap-5 sm:grid-cols-3">
+            {profile.socials
+              .filter((s) => s.label !== "Email")
+              .map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className="invert-hover box-brut flex items-center justify-between p-5"
+                >
+                  <div>
+                    <div className="label-xs">{s.label}</div>
+                    <div className="mt-1.5 text-sm font-medium">{s.handle}</div>
+                  </div>
+                  <span className="keep-accent text-accent" aria-hidden>↗</span>
+                </a>
+              ))}
           </div>
         </Reveal>
 
         {/* Footer */}
-        <footer className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-sm text-slate-500 sm:flex-row">
-          <div>© {profile.name} · Built with Next.js, Tailwind & Framer Motion</div>
-          <a href="#top" className="transition-colors hover:text-white">Back to top ↑</a>
+        <footer className="mt-20 border-t border-ink/70 pt-6">
+          <div className="flex flex-col items-center justify-between gap-3 text-xs uppercase tracking-[0.2em] text-muted sm:flex-row">
+            <span>
+              {"//---"} © {profile.name} {"---//"}
+            </span>
+            <span>Next.js / Tailwind / Framer Motion</span>
+            <a href="#top" className="transition-colors hover:text-accent">
+              [back to top ↑]
+            </a>
+          </div>
         </footer>
       </div>
     </section>

@@ -1,45 +1,31 @@
 "use client";
 
-import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import Scramble from "./Scramble";
+import Reveal from "./Reveal";
 
 export default function SectionHeading({
-  label,
-  ghost,
-  children,
-  className = "",
+  index,
+  title,
+  hint,
 }: {
-  label: string;
-  ghost: string;
-  children: ReactNode;
-  className?: string;
+  index: string;
+  title: string;
+  hint?: string;
 }) {
   return (
-    <div className={`relative mb-14 ${className}`}>
-      {/* Huge ghost outline word behind the heading */}
-      <motion.span
-        aria-hidden
-        className="ghost-text"
-        initial={{ opacity: 0, scale: 0.92 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-      >
-        {ghost}
-      </motion.span>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="relative"
-      >
-        <span className="section-label">
-          <span className="h-px w-8 shimmer-line" /> {label}
-        </span>
-        <h2 className="font-display text-3xl font-bold sm:text-4xl lg:text-5xl">{children}</h2>
-      </motion.div>
-    </div>
+    <Reveal className="mb-12 sm:mb-16">
+      {/* //--- 01 / TITLE ---------------------// */}
+      <div className="flex items-center gap-3 text-ink/80">
+        <span className="shrink-0 text-sm">{"//---"}</span>
+        <span className="shrink-0 text-sm text-accent">{index}</span>
+        <span className="shrink-0 text-sm">/</span>
+        <h2 className="shrink-0 text-sm font-bold uppercase tracking-[0.35em]">
+          <Scramble text={title} />
+        </h2>
+        <span className="h-px flex-1 border-t border-dashed border-ink/40" aria-hidden />
+        <span className="shrink-0 text-sm">{"//"}</span>
+      </div>
+      {hint && <p className="mt-4 max-w-md text-sm text-muted">{hint}</p>}
+    </Reveal>
   );
 }

@@ -1,5 +1,4 @@
-import Background from "@/components/Background";
-import Cursor from "@/components/Cursor";
+import AsciiField from "@/components/AsciiField";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -12,8 +11,7 @@ import Contact from "@/components/Contact";
 export default function Home() {
   return (
     <>
-      <Background />
-      <Cursor />
+      <AsciiField />
       <Navbar />
       <main className="relative z-10">
         <Hero />

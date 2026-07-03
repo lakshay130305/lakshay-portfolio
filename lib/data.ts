@@ -35,7 +35,7 @@ export const stats = [
 export const experience = [
   {
     company: "Publicis Sapient",
-    role: "AI/ML Engineer — Bodhi Enterprise Context Graph",
+    role: "AI/ML Intern — Bodhi Enterprise Context Graph",
     location: "Gurgaon",
     period: "2026 – Present",
     current: true,

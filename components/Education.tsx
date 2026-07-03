@@ -7,75 +7,59 @@ import SectionHeading from "./SectionHeading";
 export default function Education() {
   return (
     <section id="education" className="relative py-24 sm:py-32">
-      <div className="container-px">
-        <SectionHeading label="Education & More" ghost="LEARN">
-          Academic <span className="gradient-text-animated">journey</span>
-        </SectionHeading>
+      <div className="container-px relative z-10">
+        <SectionHeading index="05" title="Education" />
 
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-          {/* Education timeline */}
-          <div className="space-y-4">
+          {/* Education rows */}
+          <div>
             {education.map((e, i) => (
-              <Reveal key={i} delay={i * 0.08}>
-                <div className="glass glass-hover rounded-2xl p-6">
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div>
-                      <h3 className="font-display text-lg font-bold text-white">{e.degree}</h3>
-                      <div className="mt-1 text-sm text-slate-400">{e.institute}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="rounded-lg bg-gradient-to-r from-violet-500/20 to-cyan-500/20 px-3 py-1 text-sm font-semibold text-white">
-                        {e.score}
-                      </div>
-                      <div className="mt-1 text-xs text-slate-500">{e.period}</div>
-                    </div>
+              <Reveal key={i} delay={i * 0.06}>
+                <div className="group border-b border-dotted border-ink/40 py-6 first:pt-0">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                    <h3 className="text-sm font-bold uppercase tracking-wide sm:text-base">
+                      {e.degree}
+                    </h3>
+                    <span className="text-sm font-bold text-accent">{e.score}</span>
+                  </div>
+                  <div className="mt-2 flex flex-wrap items-center gap-x-3 text-sm text-muted">
+                    <span>{e.institute}</span>
+                    <span aria-hidden>{"//"}</span>
+                    <span>{e.period}</span>
                   </div>
                 </div>
               </Reveal>
             ))}
           </div>
 
-          {/* Certs, positions, interests */}
-          <div className="space-y-4">
+          {/* Extras */}
+          <div className="space-y-5">
             <Reveal>
-              <div className="glass rounded-2xl p-6">
-                <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-violet-400/80">
-                  🎓 Certifications
-                </h4>
+              <div className="box-brut p-6">
+                <div className="label-xs mb-4">{"//"} certification</div>
                 {extras.certifications.map((c) => (
-                  <div key={c.title} className="mb-2 last:mb-0">
-                    <div className="text-sm font-medium text-white">{c.title}</div>
-                    <div className="text-xs text-slate-500">{c.org} · {c.year}</div>
+                  <div key={c.title}>
+                    <div className="text-sm font-bold">{c.title}</div>
+                    <div className="mt-1 text-xs text-muted">
+                      {c.org} {"//"} {c.year}
+                    </div>
                   </div>
                 ))}
               </div>
             </Reveal>
 
-            <Reveal delay={0.08}>
-              <div className="glass rounded-2xl p-6">
-                <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-violet-400/80">
-                  ★ Leadership
-                </h4>
+            <Reveal delay={0.06}>
+              <div className="box-brut p-6">
+                <div className="label-xs mb-4">{"//"} leadership</div>
                 {extras.positions.map((p) => (
                   <div key={p.title}>
-                    <div className="text-sm font-medium text-white">{p.title}</div>
-                    <div className="text-xs text-slate-500">{p.org} · {p.year}</div>
-                    <p className="mt-1.5 text-sm text-slate-400">{p.note}</p>
+                    <div className="text-sm font-bold">{p.title}</div>
+                    <div className="mt-1 text-xs text-muted">
+                      {p.org} {"//"} {p.year}
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-muted">{p.note}</p>
                   </div>
                 ))}
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.16}>
-              <div className="glass rounded-2xl p-6">
-                <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-violet-400/80">
-                  ♦ Interests
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {extras.interests.map((it) => (
-                    <span key={it} className="chip">{it}</span>
-                  ))}
-                </div>
               </div>
             </Reveal>
           </div>

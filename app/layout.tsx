@@ -1,18 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
@@ -21,13 +9,14 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lakshay Kathpalia — AI/ML Engineer & Full-Stack Developer",
+  title: "Lakshay Kathpalia — AI/ML Intern & Full-Stack Developer",
   description:
-    "Portfolio of Lakshay Kathpalia — B.Tech CS (AI & ML) student, full-stack developer and machine-learning enthusiast based in Gurgaon, India.",
+    "Portfolio of Lakshay Kathpalia — AI/ML intern at Publicis Sapient, B.Tech CS (AI & ML) student, full-stack developer based in Gurgaon, India.",
   keywords: [
     "Lakshay Kathpalia",
     "AI Engineer",
     "Machine Learning",
+    "Knowledge Graphs",
     "Full-Stack Developer",
     "React",
     "Flask",
@@ -36,9 +25,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Lakshay Kathpalia" }],
   openGraph: {
-    title: "Lakshay Kathpalia — AI/ML Engineer & Full-Stack Developer",
+    title: "Lakshay Kathpalia — AI/ML Intern & Full-Stack Developer",
     description:
-      "B.Tech CS (AI & ML) student, full-stack developer and machine-learning enthusiast.",
+      "AI/ML intern at Publicis Sapient. B.Tech CS (AI & ML), full-stack developer and machine-learning enthusiast.",
     type: "website",
   },
 };
@@ -47,8 +36,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrains.variable}`}>
-      <body className="noise antialiased">{children}</body>
+    <html lang="en" className={jetbrains.variable}>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
