@@ -34,7 +34,7 @@ export default function About() {
         <div className="grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
           <Reveal>
             <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl">
-              Turning messy problems into <span className="gradient-text">intelligent software</span>.
+              Turning messy problems into <span className="gradient-text-animated">intelligent software</span>.
             </h2>
           </Reveal>
 
@@ -42,12 +42,12 @@ export default function About() {
             <p className="text-lg leading-relaxed text-slate-400">{profile.about}</p>
             <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
               {[
-                { k: "Focus", v: "AI / ML & Full-Stack" },
+                { k: "Now at", v: "Publicis Sapient" },
+                { k: "Focus", v: "LLMs & Knowledge Graphs" },
                 { k: "Location", v: profile.location },
                 { k: "Degree", v: "B.Tech CS, 2027" },
-                { k: "Interests", v: "Badminton, Golf" },
                 { k: "Learning", v: "VLSI Physical Design" },
-                { k: "Status", v: "Open to work" },
+                { k: "Interests", v: "Badminton, Golf" },
               ].map((item) => (
                 <div key={item.k} className="glass glass-hover rounded-xl p-4">
                   <div className="text-xs uppercase tracking-wider text-violet-400/70">{item.k}</div>

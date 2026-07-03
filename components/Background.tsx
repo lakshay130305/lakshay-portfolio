@@ -1,12 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Starfield from "./Starfield";
 
 export default function Background() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       {/* Base radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(88,28,135,0.25),_transparent_55%)]" />
+
+      {/* Twinkling stars */}
+      <Starfield />
 
       {/* Animated aurora blobs */}
       <motion.div

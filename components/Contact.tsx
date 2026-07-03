@@ -23,7 +23,7 @@ export default function Contact() {
                 <span className="h-px w-8 shimmer-line" /> Contact
               </span>
               <h2 className="mx-auto max-w-2xl font-display text-4xl font-bold leading-tight sm:text-5xl">
-                Let&apos;s build something <span className="gradient-text">remarkable</span> together.
+                Let&apos;s build something <span className="gradient-text-animated">remarkable</span> together.
               </h2>
               <p className="mx-auto mt-5 max-w-lg text-lg text-slate-400">
                 I&apos;m open to internships, collaborations and interesting problems. My inbox is always open.

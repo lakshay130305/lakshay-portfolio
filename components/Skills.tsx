@@ -3,19 +3,15 @@
 import { motion } from "framer-motion";
 import { skillGroups } from "@/lib/data";
 import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
 
 export default function Skills() {
   return (
     <section id="skills" className="relative py-24 sm:py-32">
       <div className="container-px">
-        <Reveal>
-          <span className="section-label">
-            <span className="h-px w-8 shimmer-line" /> Skills & Tools
-          </span>
-          <h2 className="mb-14 font-display text-3xl font-bold sm:text-4xl">
-            My technical <span className="gradient-text">toolkit</span>
-          </h2>
-        </Reveal>
+        <SectionHeading label="Skills & Tools" ghost="STACK">
+          My technical <span className="gradient-text-animated">toolkit</span>
+        </SectionHeading>
 
         <div className="grid gap-6 sm:grid-cols-2">
           {skillGroups.map((group, i) => (

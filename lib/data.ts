@@ -9,11 +9,12 @@ export const profile = {
   phone: "+91 7065801360",
   resumeUrl: "/Lakshay-Kathpalia-Resume.pdf",
   about:
-    "I'm a Computer Science undergraduate specializing in Artificial Intelligence and Machine Learning, with hands-on experience shipping full-stack products. From building CRM platforms with Flask, React & MySQL to designing reinforcement-learning traffic systems and OCR-powered document pipelines, I love turning messy real-world problems into clean, intelligent software.",
+    "I'm a Computer Science undergraduate specializing in Artificial Intelligence and Machine Learning, currently at Publicis Sapient building semantic extraction and entity-resolution systems for enterprise knowledge graphs. From LLM-powered extraction pipelines and GraphRAG to full-stack CRM platforms and reinforcement-learning traffic systems, I love turning messy real-world problems into clean, intelligent software.",
   roles: [
     "AI / ML Engineer",
+    "Knowledge Graph Builder",
     "Full-Stack Developer",
-    "Python Enthusiast",
+    "LLM Pipeline Engineer",
     "Problem Solver",
   ],
   socials: [
@@ -25,18 +26,35 @@ export const profile = {
 };
 
 export const stats = [
-  { value: "3+", label: "Full-stack projects shipped" },
-  { value: "2", label: "Month AI/ML internship" },
-  { value: "10+", label: "Technologies mastered" },
+  { value: "2", label: "Industry AI/ML roles" },
+  { value: "4+", label: "Full-stack & AI projects" },
+  { value: "15+", label: "Technologies mastered" },
   { value: "2027", label: "Graduating class" },
 ];
 
 export const experience = [
   {
+    company: "Publicis Sapient",
+    role: "AI/ML Engineer — Bodhi Enterprise Context Graph",
+    location: "Gurgaon",
+    period: "2026 – Present",
+    current: true,
+    summary:
+      "Building an intelligent Semantic Extraction & Entity Resolution engine that turns raw enterprise data into a trusted, graph-ready knowledge layer for Bodhi Enterprise Context Graph / Knowledge Studio.",
+    highlights: [
+      "Designing LLM + NLP extraction pipelines (prompt pipelines, spaCy / REBEL) that pull domain-specific entities, relationships and events out of PDFs, contracts, tables & images as subject–predicate–object triples.",
+      "Building an entity-resolution engine — exact, fuzzy and embedding-based semantic deduplication with merge/split recommendations and human-in-the-loop review workflows.",
+      "Normalizing entities to canonical form with ontology mapping, abbreviation expansion and controlled-vocabulary alignment.",
+      "Attaching provenance, confidence scores and SHACL-like ontology validation to every extracted fact, publishing validated knowledge as nodes & edges into a FalkorDB graph via REST APIs.",
+    ],
+    tech: ["LLMs", "Python", "Knowledge Graphs", "FalkorDB", "spaCy", "REBEL", "Vector DBs", "GraphRAG", "REST APIs"],
+  },
+  {
     company: "Fuinno Technologies LLP",
     role: "AI / ML Intern",
     location: "Gurgaon",
     period: "June 2025 – July 2025",
+    current: false,
     summary:
       "Built a full-stack CRM platform and automated document-processing pipelines end to end.",
     highlights: [
@@ -105,7 +123,7 @@ export const skillGroups = [
   },
   {
     title: "Data & AI",
-    items: ["Machine Learning", "Data Analysis", "OpenCV", "OCR", "Reinforcement Learning"],
+    items: ["LLMs", "Knowledge Graphs", "Entity Resolution", "GraphRAG", "Machine Learning", "OpenCV", "OCR", "Reinforcement Learning"],
   },
   {
     title: "Tools & Databases",
@@ -114,9 +132,9 @@ export const skillGroups = [
 ];
 
 export const marqueeSkills = [
-  "Python", "Java", "C", "SQL", "JavaScript", "React", "Flask", "Pandas",
-  "NumPy", "Bootstrap", "MySQL", "SQLite", "Git", "GitHub", "REST APIs",
-  "Machine Learning", "OpenCV", "OCR", "Data Analysis",
+  "Python", "LLMs", "Knowledge Graphs", "React", "Flask", "Entity Resolution",
+  "GraphRAG", "FalkorDB", "spaCy", "Machine Learning", "OpenCV", "OCR",
+  "Java", "SQL", "JavaScript", "Pandas", "NumPy", "MySQL", "Git", "REST APIs",
 ];
 
 export const education = [

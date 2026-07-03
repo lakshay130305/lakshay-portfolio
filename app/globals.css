@@ -77,6 +77,103 @@ body {
   }
 }
 
+/* ── Animated conic gradient border ─────────────────────── */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-angle {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.border-spin {
+  position: relative;
+  isolation: isolate;
+}
+.border-spin::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--angle),
+    #a855f7,
+    #22d3ee,
+    #e879f9,
+    #34d399,
+    #a855f7
+  );
+  animation: spin-angle 5s linear infinite;
+}
+.border-spin::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  z-index: -2;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--angle),
+    #a855f7,
+    #22d3ee,
+    #e879f9,
+    #34d399,
+    #a855f7
+  );
+  filter: blur(24px);
+  opacity: 0.35;
+  animation: spin-angle 5s linear infinite;
+}
+
+/* ── Animated flowing gradient text ─────────────────────── */
+@keyframes gradient-pan {
+  to {
+    background-position: 300% center;
+  }
+}
+
+.gradient-text-animated {
+  background: linear-gradient(
+    90deg,
+    #a78bfa,
+    #f472b6,
+    #22d3ee,
+    #34d399,
+    #a78bfa
+  );
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 5s linear infinite;
+}
+
+/* ── Ghost outline heading behind sections ──────────────── */
+.ghost-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(4rem, 14vw, 11rem);
+  line-height: 1;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.06);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ── Text glow ──────────────────────────────────────────── */
+.glow {
+  text-shadow: 0 0 30px rgba(168, 85, 247, 0.55), 0 0 80px rgba(34, 211, 238, 0.25);
+}
+
 /* Grid background pattern */
 .grid-bg {
   background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),

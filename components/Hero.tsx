@@ -4,6 +4,29 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { profile, stats } from "@/lib/data";
 
+function StaggerName({ text, className, baseDelay = 0 }: { text: string; className?: string; baseDelay?: number }) {
+  return (
+    <span className={`inline-block ${className ?? ""}`} aria-label={text}>
+      {text.split("").map((ch, i) => (
+        <motion.span
+          key={i}
+          aria-hidden
+          className="inline-block"
+          initial={{ opacity: 0, y: 40, rotateX: 90, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, rotateX: 0, filter: "blur(0px)" }}
+          transition={{
+            duration: 0.6,
+            delay: baseDelay + i * 0.045,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
+          {ch === " " ? " " : ch}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
 function RotatingRole() {
   const [index, setIndex] = useState(0);
   useEffect(() => {
@@ -48,16 +71,18 @@ export default function Hero() {
             Available for internships & opportunities
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.05 }}
-            className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
-          >
-            Hi, I&apos;m <br className="hidden sm:block" />
-            <span className="gradient-text">{profile.firstName}</span>{" "}
-            <span className="text-white">{profile.lastName}</span>
-          </motion.h1>
+          <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl xl:text-8xl">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="block text-2xl font-medium text-slate-400 sm:text-3xl"
+            >
+              Hi, I&apos;m
+            </motion.span>
+            <StaggerName text={profile.firstName} className="gradient-text-animated glow" baseDelay={0.15} />{" "}
+            <StaggerName text={profile.lastName} className="text-white" baseDelay={0.5} />
+          </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 24 }}
@@ -137,14 +162,14 @@ export default function Hero() {
               <div className="mt-1 text-sm text-slate-400">{profile.tagline}</div>
 
               <div className="mt-4 flex flex-wrap gap-2">
-                {["Python", "React", "Flask", "ML"].map((t) => (
+                {["LLMs", "Knowledge Graphs", "Python", "React"].map((t) => (
                   <span key={t} className="chip">{t}</span>
                 ))}
               </div>
 
               <div className="mt-5 flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3">
                 <span className="text-sm text-slate-400">Currently</span>
-                <span className="text-sm font-medium text-emerald-400">Building cool things ✦</span>
+                <span className="text-sm font-medium text-emerald-400">AI/ML @ Publicis Sapient ✦</span>
               </div>
             </div>
           </div>

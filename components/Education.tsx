@@ -2,19 +2,15 @@
 
 import { education, extras } from "@/lib/data";
 import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
 
 export default function Education() {
   return (
     <section id="education" className="relative py-24 sm:py-32">
       <div className="container-px">
-        <Reveal>
-          <span className="section-label">
-            <span className="h-px w-8 shimmer-line" /> Education & More
-          </span>
-          <h2 className="mb-14 font-display text-3xl font-bold sm:text-4xl">
-            Academic <span className="gradient-text">journey</span>
-          </h2>
-        </Reveal>
+        <SectionHeading label="Education & More" ghost="LEARN">
+          Academic <span className="gradient-text-animated">journey</span>
+        </SectionHeading>
 
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
           {/* Education timeline */}

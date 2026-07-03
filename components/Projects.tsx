@@ -4,6 +4,7 @@ import { useRef, type MouseEvent } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { projects } from "@/lib/data";
 import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
 
 function TiltCard({ project }: { project: (typeof projects)[number] }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -77,18 +78,13 @@ export default function Projects() {
   return (
     <section id="projects" className="relative py-24 sm:py-32">
       <div className="container-px">
-        <Reveal>
-          <span className="section-label">
-            <span className="h-px w-8 shimmer-line" /> Projects
-          </span>
-          <div className="mb-14 flex flex-wrap items-end justify-between gap-4">
-            <h2 className="font-display text-3xl font-bold sm:text-4xl">
-              Things I&apos;ve <span className="gradient-text">built</span>
-            </h2>
-            <p className="max-w-sm text-slate-400">
-              A mix of applied ML, computer vision and full-stack engineering.
-            </p>
-          </div>
+        <SectionHeading label="Projects" ghost="BUILDS">
+          Things I&apos;ve <span className="gradient-text-animated">built</span>
+        </SectionHeading>
+        <Reveal className="-mt-8 mb-12">
+          <p className="max-w-sm text-slate-400">
+            A mix of applied ML, computer vision and full-stack engineering.
+          </p>
         </Reveal>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
